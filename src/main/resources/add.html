@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Add Pet</title>
+</head>
+<body>
+<h2>Add New Pet</h2>
+
+<form th:action="@{/add}" method="post" th:object="${pet}">
+  <div>
+    <label for="name">Pet Name:</label>
+    <input type="text" id="name" name="name" th:field="*{name}"/>
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+  </div>
+
+  <div>
+    <label for="kind">Pet Kind:</label>
+    <select id="kind" name="kind" th:field="*{kind}">
+      <option value="Cat">Cat</option>
+      <option value="Dog">Dog</option>
+      <option value="Rabbit">Rabbit</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="female">Female:</label>
+    <input type="radio" id="female" name="sex" value="Female" th:checked="${pet.sex == 'Female'}"/>
+    <label for="male">Male:</label>
+    <input type="radio" id="male" name="sex" value="Male" th:checked="${pet.sex == 'Male'}"/>
+  </div>
+
+  <div>
+    <label for="vaccinated">Vaccination:</label>
+    <input type="checkbox" id="vaccinated" name="vaccinated" th:checked="${pet.vaccinated}"/>
+  </div>
+
+  <button type="submit">Save</button>
+</form>
+
+<a href="/">Cancel</a>
+
+</body>
+</html>
